@@ -46,6 +46,18 @@ public class ShortUrlService {
         }
     }
 
+    public Response getOriginalUrl(String shortCode) {
+        try{
+            UrlModel url = shortUrlRepo.findByShortUrl(shortCode);
+            if(url != null){
+                return new Response(url.getOriginalUrl(), HttpStatus.OK);
+            }
+            return new Response("URL not found", HttpStatus.NOT_FOUND);
+        } catch (Exception e){
+            return new Response(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     public Response updateOriginalUrl(UrlModel urlModel) {
         try{
             UrlModel existingModel = shortUrlRepo.findByShortUrl(urlModel.getShortUrl());
