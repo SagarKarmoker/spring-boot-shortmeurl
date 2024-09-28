@@ -15,7 +15,7 @@ public class ShortUrlService {
     @Autowired
     private ShortUrlRepo shortUrlRepo;
 
-    private static final String BASE_URL = "http://localhost:3000/short/";
+    private static final String BASE_URL = "https://shortmeurl.up.railway.app/short/";
 
     public Response getShortUrl(UrlModel urlModel) {
         try{
