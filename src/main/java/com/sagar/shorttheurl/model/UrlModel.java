@@ -4,21 +4,26 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-
-import java.util.Date;
-import java.util.UUID;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class UrlModel {
     @jakarta.persistence.Id
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
-    private String url;
-    private String shortcode;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String originalUrl;
+    private String shortUrl;
     private int visitCounter;
-    private Date createdAt;
-    private Date updatedAt;
+
+    public UrlModel(String originalUrl, String shortUrl){
+        this.id = this.getId();
+        this.originalUrl = originalUrl;
+        this.shortUrl = shortUrl;
+        visitCounter = 0;
+    }
 }
