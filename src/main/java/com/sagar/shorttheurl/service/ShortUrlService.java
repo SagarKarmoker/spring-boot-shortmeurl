@@ -15,7 +15,7 @@ public class ShortUrlService {
     @Autowired
     private ShortUrlRepo shortUrlRepo;
 
-    private static final String BASE_URL = "http://localhost:3000/";
+    private static final String BASE_URL = "http://localhost:3000/short/";
 
     public Response getShortUrl(UrlModel urlModel) {
         try{
@@ -28,7 +28,7 @@ public class ShortUrlService {
             }
             urlModel.setShortUrl(shortUrl);
             shortUrlRepo.save(urlModel);
-            return new Response(BASE_URL + urlModel.getShortUrl(), HttpStatus.OK);
+            return new Response(BASE_URL + urlModel.getShortUrl(), HttpStatus.CREATED);
         }catch (Exception e){
             return new Response(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
